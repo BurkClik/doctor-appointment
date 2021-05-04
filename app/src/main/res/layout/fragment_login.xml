@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewLogin"
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        app:srcCompat="@drawable/ic_undraw_medicine_b1ol" />
+
+    <TextView
+        android:id="@+id/textViewLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/login_title"
+        android:textAlignment="center"
+        android:textColor="#FF1D1B1D"
+        android:textSize="28sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.DoctorAppointment.TextInputField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:hint="@string/login_mail_hint_text"
+        app:startIconDrawable="@drawable/ic_mail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.DoctorAppointment.TextInputField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="@string/login_password_hint_text"
+        app:endIconMode="password_toggle"
+        app:startIconDrawable="@drawable/ic_lock">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textViewForgotPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/login_forgot_password_text"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/primary_color"
+        android:textSize="12sp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/primary_color"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/login_button_text"
+        android:textSize="15sp"
+        app:cornerRadius="30dp" />
+
+    <!-- This field should replace with Spannable Test -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:text="@string/login_account_question_text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textButtonSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/login_sign_up_button_text"
+            android:textColor="@color/primary_color"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

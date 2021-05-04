@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.DoctorAppointment.TextInputField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_text_input_view</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_text_input_view</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_text_input_view</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_text_input_view</item>
+        <item name="startIconTint">@color/text_input_box_stroke</item>
+        <item name="endIconTint">@color/text_input_box_stroke</item>
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="android:textColorHint">@color/text_input_box_stroke</item>
+    </style>
+</resources>
