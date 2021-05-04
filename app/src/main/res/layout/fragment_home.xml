@@ -72,15 +72,6 @@
             app:layout_constraintLeft_toLeftOf="@id/text_input_search"
             app:layout_constraintTop_toBottomOf="@id/text_input_search" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="view all"
-            android:textColor="#0B2246"
-            app:layout_constraintBottom_toBottomOf="@id/text_categories"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text_categories" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_card"
             android:layout_width="match_parent"
