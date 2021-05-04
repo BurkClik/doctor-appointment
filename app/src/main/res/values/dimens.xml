@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="radius_text_input_view">30dp</dimen>
+    <dimen name="item_doctor_margin">20dp</dimen>
+    <dimen name="item_category_margin">12dp</dimen>
 </resources>

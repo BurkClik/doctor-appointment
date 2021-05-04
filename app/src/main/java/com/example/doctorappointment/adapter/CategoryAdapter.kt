@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doctorappointment.data.local.Category
-import com.example.doctorappointment.databinding.CategoryCardBinding
+import com.example.doctorappointment.databinding.ItemCategoryBinding
 
 class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val binding =
-            CategoryCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CategoryViewHolder(binding)
     }
 
@@ -20,7 +20,7 @@ class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder
         holder.bind(getItem(position))
     }
 
-    class CategoryViewHolder(private val binding: CategoryCardBinding) :
+    class CategoryViewHolder(private val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
             fun bind(category: Category) {

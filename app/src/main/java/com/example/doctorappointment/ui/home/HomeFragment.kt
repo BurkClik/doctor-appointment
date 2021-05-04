@@ -42,6 +42,7 @@ class HomeFragment : Fragment() {
         // Initialize category data
         binding.recyclerviewCard.apply {
             adapter = categoryAdapter
+            addItemDecoration(CategoryDecorator())
         }
 
         viewModel.categories.observe(viewLifecycleOwner) {
@@ -51,6 +52,7 @@ class HomeFragment : Fragment() {
         // Initialize doctor data
         binding.recyclerviewDoctor.apply {
             adapter = doctorAdapter
+            addItemDecoration(DoctorDecorator())
         }
 
         viewModel.doctors.observe(viewLifecycleOwner) {
