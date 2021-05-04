@@ -6,7 +6,7 @@ import androidx.annotation.StringRes
 data class Doctor(
     @DrawableRes val doctorImage: Int,
     val doctorName: String,
-    @StringRes val doctorCategory: Int,
+    val doctorCategory: String,
     @DrawableRes val doctorCategoryIcon: Int,
     val doctorRating: String,
 )

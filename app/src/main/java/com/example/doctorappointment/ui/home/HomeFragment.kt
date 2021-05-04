@@ -17,8 +17,13 @@ class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    // Category
     private val categoryDatasource = CategoryDatasource().loadCategoryList()
     private val categoryAdapter = CategoryAdapter()
+
+    // Doctor
+    private val doctorDatasource = DoctorDatasource().loadDoctorList()
+    private val doctorAdapter = DoctorAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,11 +43,9 @@ class HomeFragment : Fragment() {
         }
 
         // Initialize doctor data
-        val doctorData = DoctorDatasource().loadDoctorList()
-
-        val doctorRecyclerView = view.findViewById<RecyclerView>(R.id.recyclerview_doctor)
-        doctorRecyclerView.adapter = DoctorAdapter(view.context, doctorData)
-
-        doctorRecyclerView.setHasFixedSize(true)
+        binding.recyclerviewDoctor.apply {
+            adapter = doctorAdapter
+            doctorAdapter.submitList(doctorDatasource)
+        }
     }
 }
