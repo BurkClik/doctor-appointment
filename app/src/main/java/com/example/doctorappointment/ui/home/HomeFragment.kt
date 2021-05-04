@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doctorappointment.R
 import com.example.doctorappointment.adapter.CategoryAdapter
@@ -17,12 +18,14 @@ class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    // ViewModel
+    private val viewModel by viewModels<HomeViewModel>()
+
     // Category
     private val categoryDatasource = CategoryDatasource().loadCategoryList()
     private val categoryAdapter = CategoryAdapter()
 
     // Doctor
-    private val doctorDatasource = DoctorDatasource().loadDoctorList()
     private val doctorAdapter = DoctorAdapter()
 
     override fun onCreateView(
@@ -39,13 +42,19 @@ class HomeFragment : Fragment() {
         // Initialize category data
         binding.recyclerviewCard.apply {
             adapter = categoryAdapter
-            categoryAdapter.submitList(categoryDatasource)
+        }
+
+        viewModel.categories.observe(viewLifecycleOwner) {
+            categoryAdapter.submitList(it)
         }
 
         // Initialize doctor data
         binding.recyclerviewDoctor.apply {
             adapter = doctorAdapter
-            doctorAdapter.submitList(doctorDatasource)
+        }
+
+        viewModel.doctors.observe(viewLifecycleOwner) {
+            doctorAdapter.submitList(it)
         }
     }
 }
