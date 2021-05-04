@@ -11,26 +11,31 @@ import com.example.doctorappointment.adapter.CategoryAdapter
 import com.example.doctorappointment.adapter.DoctorAdapter
 import com.example.doctorappointment.data.local.CategoryDatasource
 import com.example.doctorappointment.data.local.DoctorDatasource
+import com.example.doctorappointment.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
+    private var _binding : FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    private val categoryDatasource = CategoryDatasource().loadCategoryList()
+    private val categoryAdapter = CategoryAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize category data
-        val categoryData = CategoryDatasource().loadCategoryList()
-
-        val categoryRecyclerView = view.findViewById<RecyclerView>(R.id.recyclerview_card)
-        categoryRecyclerView.adapter = CategoryAdapter(view.context, categoryData)
-
-        categoryRecyclerView.setHasFixedSize(true)
+        binding.recyclerviewCard.apply {
+            adapter = categoryAdapter
+            categoryAdapter.submitList(categoryDatasource)
+        }
 
         // Initialize doctor data
         val doctorData = DoctorDatasource().loadDoctorList()

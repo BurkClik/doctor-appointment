@@ -1,34 +1,41 @@
 package com.example.doctorappointment.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.doctorappointment.R
 import com.example.doctorappointment.data.local.Category
+import com.example.doctorappointment.databinding.CategoryCardBinding
 
-class CategoryAdapter(private val context: Context, private val dataset: List<Category>) :
-    RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
-
-    class CategoryViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val categoryImage: ImageView = view.findViewById(R.id.category_image)
-        val categoryTitle: TextView = view.findViewById(R.id.category_title)
-    }
+class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.category_card, parent, false)
-        return CategoryViewHolder(adapterLayout)
+        val binding =
+            CategoryCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CategoryViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val category = dataset[position]
-        holder.categoryImage.setImageResource(category.categoryImage)
-        holder.categoryTitle.text = context.resources.getString(category.categoryTitle)
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount() = dataset.size
+    class CategoryViewHolder(private val binding: CategoryCardBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+            fun bind(category: Category) {
+                binding.categoryTitle.text = category.categoryTitle
+                binding.categoryImage.setImageResource(category.categoryImage)
+            }
+    }
+
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Category>() {
+            override fun areItemsTheSame(oldItem: Category, newItem: Category) =
+                oldItem.categoryTitle == newItem.categoryTitle
+
+            override fun areContentsTheSame(oldItem: Category, newItem: Category) =
+                oldItem == newItem
+        }
+    }
 }
