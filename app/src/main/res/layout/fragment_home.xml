@@ -10,37 +10,35 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FBFCFF"
-        android:paddingHorizontal="24dp">
+        android:background="#FBFCFF">
 
         <TextView
             android:id="@+id/text_search"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/poppins_light"
             android:text="Search"
             android:textColor="#0B2246"
             android:textSize="28sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_doctor_right_now"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="Doctor Right Now!"
             android:textColor="#0B2246"
             android:textSize="30sp"
-            app:layout_constraintLeft_toLeftOf="@id/text_search"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/text_search" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_search"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:hint="Search by name"
@@ -50,7 +48,8 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:boxStrokeWidth="0dp"
-            app:layout_constraintLeft_toLeftOf="@id/text_doctor_right_now"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/text_doctor_right_now"
             app:startIconDrawable="@drawable/ic_search">
 
@@ -68,43 +67,58 @@
             android:text="Categories"
             android:textColor="#0B2246"
             android:textSize="20sp"
-            app:layout_constraintLeft_toLeftOf="@id/text_input_search"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/text_input_search" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_card"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginTop="24dp"
             android:orientation="horizontal"
             android:paddingHorizontal="4dp"
             android:paddingVertical="4dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintLeft_toLeftOf="@id/text_categories"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/text_categories"
             tools:listitem="@layout/category_card" />
 
         <TextView
             android:id="@+id/top_rated_doctor"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/poppins"
             android:text="Top Rated Doctor"
             android:textColor="#0B2246"
-            app:layout_constraintLeft_toLeftOf="@id/recyclerview_card"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@+id/recyclerview_card" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_doctor"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/top_rated_doctor"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/top_rated_doctor"
             tools:listitem="@layout/doctor_card" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
