@@ -16,7 +16,6 @@ class HomeViewModel : ViewModel() {
     private val _categories = MutableLiveData<List<Category>>()
     private val _remoteDoctors = MutableLiveData<List<User>>()
 
-
     val categories: LiveData<List<Category>> = _categories
     val remoteDoctors: LiveData<List<User>> = _remoteDoctors
 
@@ -30,7 +29,7 @@ class HomeViewModel : ViewModel() {
             .enqueue(object : Callback<List<User>> {
                 override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                     Log.i("Burak", "$response")
-                    Log.i("Burak", "${response.body()}")
+                    //Log.i("Burak", "${response.body()}")
                     if (response.isSuccessful and response.body()!!.isNotEmpty()) {
                         _remoteDoctors.value = response.body()
                     }

@@ -1,6 +1,7 @@
 package com.example.doctorappointment.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -55,5 +56,11 @@ class HomeFragment : Fragment() {
         viewModel.remoteDoctors.observe(viewLifecycleOwner) {
             doctorAdapter.submitList(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i("Burak", "onDestroyView")
+        _binding = null
     }
 }

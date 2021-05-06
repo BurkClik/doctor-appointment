@@ -36,6 +36,17 @@
         tools:text="Dr. Ted Mosby" />
 
     <TextView
+        android:id="@+id/textViewDoctorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/textViewDoctorName"
+        app:layout_constraintTop_toBottomOf="@id/textViewDoctorName"
+        tools:text="Professor" />
+
+    <TextView
         android:id="@+id/textViewDoctorDepartment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,9 +54,33 @@
         android:fontFamily="@font/poppins"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/textViewDoctorName"
-        app:layout_constraintTop_toBottomOf="@id/textViewDoctorName"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewProfileImage"
+        app:layout_constraintStart_toStartOf="@id/textViewDoctorTitle"
         tools:text="Dentist" />
+
+    <TextView
+        android:id="@+id/textViewDoctorAboutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/doctor_detail_about_title"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/view" />
+
+    <TextView
+        android:id="@+id/textViewDoctorAbout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins_light"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/textViewDoctorAboutTitle"
+        tools:text="Buraya Uzunca Bir yazı gelecek" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"

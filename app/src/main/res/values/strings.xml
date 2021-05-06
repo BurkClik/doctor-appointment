@@ -18,4 +18,5 @@
     <string name="neurology">Neurology</string>
     <string name="dentist">Dentist</string>
     <string name="orthopedic">Orthopedic</string>
+    <string name="doctor_detail_about_title">About</string>
 </resources>
