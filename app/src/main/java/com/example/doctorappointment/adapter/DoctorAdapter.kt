@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doctorappointment.R
-import com.example.doctorappointment.data.local.Doctor
+import com.example.doctorappointment.data.remote.User
 import com.example.doctorappointment.databinding.ItemDoctorBinding
 
-class DoctorAdapter : ListAdapter<Doctor, DoctorAdapter.DoctorViewHolder>(DIFF_CALLBACK) {
+class DoctorAdapter : ListAdapter<User, DoctorAdapter.DoctorViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoctorViewHolder {
         val binding = ItemDoctorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,21 +22,17 @@ class DoctorAdapter : ListAdapter<Doctor, DoctorAdapter.DoctorViewHolder>(DIFF_C
 
     class DoctorViewHolder(private val binding: ItemDoctorBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(doctor: Doctor) {
-                binding.doctorName.text = doctor.doctorName
-                binding.doctorCategory.text = doctor.doctorCategory
-                binding.ratingText.text = doctor.doctorRating
-                binding.doctorImage.setImageResource(R.drawable.doctor_image)
-                binding.doctorCategoryIcon.setImageResource(R.drawable.ic_star_rate)
-            }
+        fun bind(user: User) {
+            binding.doctorName.text = user.name
+            binding.doctorImage.setImageResource(R.drawable.doctor_image)
+        }
     }
 
     companion object {
-        var DIFF_CALLBACK = object : DiffUtil.ItemCallback<Doctor>() {
-            override fun areItemsTheSame(oldItem: Doctor, newItem: Doctor) =
-                oldItem.doctorName == newItem.doctorName
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<User>() {
+            override fun areItemsTheSame(oldItem: User, newItem: User) = oldItem._id == newItem._id
 
-            override fun areContentsTheSame(oldItem: Doctor, newItem: Doctor) = oldItem == newItem
+            override fun areContentsTheSame(oldItem: User, newItem: User) = oldItem == newItem
         }
     }
 }

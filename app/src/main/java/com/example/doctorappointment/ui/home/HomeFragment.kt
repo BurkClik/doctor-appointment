@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
-import com.example.doctorappointment.R
 import com.example.doctorappointment.adapter.CategoryAdapter
 import com.example.doctorappointment.adapter.DoctorAdapter
 import com.example.doctorappointment.data.local.CategoryDatasource
-import com.example.doctorappointment.data.local.DoctorDatasource
 import com.example.doctorappointment.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -55,7 +52,7 @@ class HomeFragment : Fragment() {
             addItemDecoration(DoctorDecorator())
         }
 
-        viewModel.doctors.observe(viewLifecycleOwner) {
+        viewModel.remoteDoctors.observe(viewLifecycleOwner) {
             doctorAdapter.submitList(it)
         }
     }
