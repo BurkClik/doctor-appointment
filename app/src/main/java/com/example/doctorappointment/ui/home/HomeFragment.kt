@@ -7,20 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.doctorappointment.R
 import com.example.doctorappointment.adapter.CategoryAdapter
 import com.example.doctorappointment.adapter.DoctorAdapter
 import com.example.doctorappointment.data.local.CategoryDatasource
 import com.example.doctorappointment.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-    private var _binding : FragmentHomeBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     // ViewModel
     private val viewModel by viewModels<HomeViewModel>()
 
     // Category
-    private val categoryDatasource = CategoryDatasource().loadCategoryList()
     private val categoryAdapter = CategoryAdapter()
 
     // Doctor
@@ -55,6 +56,17 @@ class HomeFragment : Fragment() {
 
         viewModel.remoteDoctors.observe(viewLifecycleOwner) {
             doctorAdapter.submitList(it)
+        }
+
+        doctorAdapter.itemClickListener = {
+            val action = HomeFragmentDirections.actionHomeFragmentToDoctorDetailFragment(
+                doctorName = it.name,
+                doctorTitle = it.doctor.title,
+                doctorDepartment = it.doctor.department,
+                doctorAbout = it.doctor.about,
+                doctorImage = R.drawable.doctor_image
+            )
+            findNavController().navigate(action)
         }
     }
 
