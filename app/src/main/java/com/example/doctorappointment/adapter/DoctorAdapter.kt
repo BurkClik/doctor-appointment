@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doctorappointment.R
+import com.example.doctorappointment.common.ext.capitalizeEachWord
 import com.example.doctorappointment.data.remote.User
 import com.example.doctorappointment.databinding.ItemDoctorBinding
 import java.util.*
@@ -26,9 +27,10 @@ class DoctorAdapter : ListAdapter<User, DoctorAdapter.DoctorViewHolder>(DIFF_CAL
     class DoctorViewHolder(private val binding: ItemDoctorBinding, private val itemClickListener: (User) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
-            binding.doctorName.text = user.name
+            binding.doctorName.text = user.name.capitalizeEachWord()
             binding.doctorCategory.text = user.doctor.department.capitalize(Locale.getDefault())
             binding.doctorImage.setImageResource(R.drawable.doctor_image)
+            binding.ratingText.text = user.doctor.voteRate.toString()
 
             binding.root.setOnClickListener {
                 itemClickListener(user)

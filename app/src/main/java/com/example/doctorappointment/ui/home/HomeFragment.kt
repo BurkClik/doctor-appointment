@@ -72,7 +72,6 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.i("Burak", "onDestroyView")
         _binding = null
     }
 }

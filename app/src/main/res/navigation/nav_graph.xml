@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_homeFragment_to_doctorDetailFragment"
             app:destination="@id/doctorDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_doctorSearchFragment"
+            app:destination="@id/doctorSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -53,4 +56,8 @@
             android:name="doctorImage"
             app:argType="reference" />
     </fragment>
+    <fragment
+        android:id="@+id/doctorSearchFragment"
+        android:name="com.example.doctorappointment.ui.doctor.list.DoctorListFragment"
+        android:label="DoctorSearchFragment" />
 </navigation>

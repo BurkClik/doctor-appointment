@@ -1,14 +1,13 @@
 package com.example.doctorappointment.ui.doctor.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.example.doctorappointment.common.ext.capitalizeEachWord
 import com.example.doctorappointment.databinding.FragmentDoctorDetailBinding
-import java.util.*
 
 class DoctorDetailFragment : Fragment() {
     private var _binding: FragmentDoctorDetailBinding? = null
@@ -35,23 +34,12 @@ class DoctorDetailFragment : Fragment() {
         val doctorImage = args.doctorImage
 
         binding.apply {
-            textViewDoctorName.text = doctorName
+            textViewDoctorName.text = doctorName.capitalizeEachWord()
             textViewDoctorTitle.text = doctorTitle
             textViewDoctorDepartment.text = doctorDepartment
             textViewDoctorAbout.text = doctorAbout
             imageViewProfileImage.setImageResource(doctorImage)
         }
-    }
-
-    // İsimleri bölüm ilk harflerini büyütüyor.
-    private fun String.capitalizeSentence() : String {
-        val words: MutableList<String> = this.split(" ").toMutableList()
-        val word = ""
-        for (i in words) {
-            word.plus(i)
-        }
-        Log.i("Burak", "Word -> $word")
-        return word
     }
 
     override fun onDestroyView() {

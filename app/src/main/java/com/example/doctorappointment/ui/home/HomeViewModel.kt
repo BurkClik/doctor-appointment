@@ -25,7 +25,7 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun getDoctor() {
-        ClientService.retrofitService.getDoctors()
+        ClientService.retrofitService.getTopRatedDoctors(5)
             .enqueue(object : Callback<List<User>> {
                 override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                     Log.i("Burak", "$response")
