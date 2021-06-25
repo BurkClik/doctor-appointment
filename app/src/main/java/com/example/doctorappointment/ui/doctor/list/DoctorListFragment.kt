@@ -46,7 +46,6 @@ class DoctorListFragment : Fragment() {
             )
         }
 
-
         viewModel.currentQuery.observe(viewLifecycleOwner) {
             doctorAdapter.submitList(it)
         }

@@ -19,4 +19,7 @@
     <string name="dentist">Dentist</string>
     <string name="orthopedic">Orthopedic</string>
     <string name="doctor_detail_about_title">About</string>
+
+    <string name="mail_empty">This field must not empty</string>
+    <string name="mail_contains_check">Email must contain @ and .</string>
 </resources>

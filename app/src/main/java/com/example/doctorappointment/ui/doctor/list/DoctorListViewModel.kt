@@ -42,7 +42,6 @@ class DoctorListViewModel : ViewModel() {
         getSearchResult(newQuery.value!!)
     }
 
-
     companion object {
         private const val DEFAULT_QUERY = ""
     }
