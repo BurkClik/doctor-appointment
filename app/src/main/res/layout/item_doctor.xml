@@ -1,73 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="84dp">
+<layout xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="baseModel"
+            type="com.example.doctorappointment.domain.model.User" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="84dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/doctor_image"
-            android:layout_width="54dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="12dp"
-            android:background="#F7F7F7"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/doctor_image" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/doctor_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Dr. Fred Mask"
-            android:textColor="@color/text_color"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toRightOf="@id/doctor_image"
-            app:layout_constraintTop_toTopOf="@id/doctor_image" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/doctor_image"
+                android:layout_width="54dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="12dp"
+                android:background="#F7F7F7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/doctor_image" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/doctor_category_icon"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            app:layout_constraintLeft_toLeftOf="@id/doctor_name"
-            app:layout_constraintTop_toBottomOf="@id/doctor_name"
-            app:srcCompat="@drawable/ic_category_mage" />
+            <TextView
+                android:id="@+id/doctor_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@{baseModel.name}"
+                android:textColor="@color/text_color"
+                android:textSize="18sp"
+                app:layout_constraintLeft_toRightOf="@id/doctor_image"
+                app:layout_constraintTop_toTopOf="@id/doctor_image"
+                tools:text="Burak Çelik"/>
 
-        <TextView
-            android:id="@+id/doctor_category"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_light"
-            android:text="Dentist"
-            app:layout_constraintLeft_toRightOf="@id/doctor_category_icon"
-            app:layout_constraintTop_toBottomOf="@id/doctor_name" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/doctor_category_icon"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                app:layout_constraintLeft_toLeftOf="@id/doctor_name"
+                app:layout_constraintTop_toBottomOf="@id/doctor_name"
+                app:srcCompat="@drawable/ic_category_mage" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/rating_icon"
-            android:layout_width="0dp"
-            android:layout_height="16dp"
-            app:srcCompat="@drawable/ic_star_rate"
-            app:layout_constraintEnd_toStartOf="@id/rating_text"
-            app:layout_constraintTop_toTopOf="@id/rating_text"
-            app:layout_constraintBottom_toBottomOf="@id/rating_text"/>
+            <TextView
+                android:id="@+id/doctor_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:text="@{baseModel.doctor.title}"
+                app:layout_constraintLeft_toRightOf="@id/doctor_category_icon"
+                app:layout_constraintTop_toBottomOf="@id/doctor_name"
+                tools:text="Dentist"/>
 
-        <TextView
-            android:id="@+id/rating_text"
-            android:layout_width="0dp"
-            android:layout_marginEnd="12dp"
-            android:layout_height="wrap_content"
-            android:text="4.9"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/doctor_category"
-         />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/rating_icon"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/rating_text"
+                app:layout_constraintEnd_toStartOf="@id/rating_text"
+                app:layout_constraintTop_toTopOf="@id/rating_text"
+                app:srcCompat="@drawable/ic_star_rate" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/rating_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="@{baseModel.doctor.voteRate}"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/doctor_category" />
 
-</com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -22,4 +22,12 @@
 
     <string name="mail_empty">This field must not empty</string>
     <string name="mail_contains_check">Email must contain @ and .</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="doctor">Doctor</string>
+    <string name="hospital">Hospital</string>
+    <string name="profile">Profile</string>
+    <string name="upcoming_appointments">Upcoming Appointments</string>
+    <string name="past_appointments">Past Appointments</string>
 </resources>

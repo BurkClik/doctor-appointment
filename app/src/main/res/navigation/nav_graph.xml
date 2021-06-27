@@ -3,61 +3,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.doctorappointment.ui.home.HomeFragment"
         android:label="HomeFragment" >
         <action
-            android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_doctorDetailFragment"
             app:destination="@id/doctorDetailFragment" />
         <action
             android:id="@+id/action_homeFragment_to_doctorSearchFragment"
             app:destination="@id/doctorSearchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.doctorappointment.ui.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/loginSuccess"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph"/>
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.doctorappointment.ui.register.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/sginUpSuccess"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph"/>
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/doctorDetailFragment"
         android:name="com.example.doctorappointment.ui.doctor.detail.DoctorDetailFragment"
         android:label="DoctorDetailFragment" >
+        <action
+            android:id="@+id/action_doctorDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
         <argument
-            android:name="doctorName"
-            app:argType="string"
-            android:defaultValue="doctorName" />
-        <argument
-            android:name="doctorTitle"
-            app:argType="string"
-            android:defaultValue="doctorTitle" />
-        <argument
-            android:name="doctorAbout"
-            app:argType="string"
-            android:defaultValue="doctorAbout" />
-        <argument
-            android:name="doctorDepartment"
-            app:argType="string"
-            android:defaultValue="doctorDepartment" />
-        <argument
-            android:name="doctorImage"
-            app:argType="reference" />
+            android:name="doctorId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/doctorSearchFragment"
         android:name="com.example.doctorappointment.ui.doctor.list.DoctorListFragment"
-        android:label="DoctorSearchFragment" />
+        android:label="DoctorSearchFragment" >
+        <action
+            android:id="@+id/action_doctorSearchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_doctorSearchFragment_to_doctorDetailFragment"
+            app:destination="@id/doctorDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.doctorappointment.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/logoutSuccess"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

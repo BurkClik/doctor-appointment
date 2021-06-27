@@ -4,37 +4,47 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.doctorappointment.data.remote.ClientService
-import com.example.doctorappointment.data.remote.User
+import androidx.lifecycle.viewModelScope
+import com.example.doctorappointment.common.BaseViewModel
+import com.example.doctorappointment.common.Resource
+import com.example.doctorappointment.domain.UserUseCase
+import com.example.doctorappointment.domain.model.User
+import com.example.doctorappointment.ui.home.HomeFragmentDirections
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class DoctorListViewModel : ViewModel() {
-    private val _currentQuery = MutableLiveData<List<User>>()
+@HiltViewModel
+class DoctorListViewModel @Inject constructor(private val userUseCase: UserUseCase) : BaseViewModel() {
+    private val _currentQuery = MutableLiveData<List<User>?>()
     private val _newQuery = MutableLiveData<String>()
 
-    val currentQuery: LiveData<List<User>> = _currentQuery
+    val currentQuery: LiveData<List<User>?> = _currentQuery
     val newQuery: LiveData<String> = _newQuery
+
+    val itemClickListener: (User) -> Unit = {
+        val action = DoctorListFragmentDirections.actionDoctorSearchFragmentToDoctorDetailFragment(it._id)
+        navigation.navigate(action)
+    }
 
     init {
         getSearchResult()
     }
 
     private fun getSearchResult(query: String = DEFAULT_QUERY) {
-        ClientService.retrofitService.searchDoctor(doctor = query)
-            .enqueue(object : Callback<List<User>> {
-                override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
-                    Log.i("Burak", "$response")
-                    if (response.isSuccessful and response.body()!!.isNotEmpty()) {
-                        _currentQuery.value = response.body()
-                    }
+        viewModelScope.launch {
+            userUseCase.getSearchDoctor(query).collect { resource ->
+                when (resource) {
+                    is Resource.Success -> _currentQuery.value = resource.data
+                    is Resource.Error -> Log.i("Burak", "Hata")
+                    Resource.Loading -> Log.i("Burak", "Loading")
                 }
-
-                override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                    Log.e("Burak", t.message.toString())
-                }
-            })
+            }
+        }
     }
 
     fun newSearch(query: String) {

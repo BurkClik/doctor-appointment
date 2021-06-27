@@ -9,12 +9,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.doctorappointment.R
+import com.example.doctorappointment.common.BaseFragment
 import com.example.doctorappointment.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class LoginFragment : Fragment() {
-    private lateinit var signUpButton: TextView
+@AndroidEntryPoint
+class LoginFragment : BaseFragment() {
+
+    override val viewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,14 +27,8 @@ class LoginFragment : Fragment() {
     ): View {
         val binding: FragmentLoginBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        signUpButton = view.findViewById(R.id.textButtonSignUp)
-        signUpButton.setOnClickListener {
-            it.findNavController().navigate(R.id.registerFragment)
-        }
     }
 }

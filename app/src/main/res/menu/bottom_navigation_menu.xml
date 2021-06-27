@@ -4,27 +4,27 @@
         android:id="@+id/homeFragment"
         android:enabled="true"
         android:icon="@drawable/ic_home"
-        android:title="Home"
+        android:title="@string/home"
         />
 
     <item
         android:id="@+id/doctorSearchFragment"
         android:enabled="true"
         android:icon="@drawable/ic_health"
-        android:title="Doctor" />
+        android:title="@string/doctor" />
 
     <item
         android:id="@+id/hospitalListFragment"
         android:enabled="true"
         android:icon="@drawable/ic_hospital"
-        android:title="Hospital"
+        android:title="@string/hospital"
         />
 
     <item
-        android:id="@+id/loginFragment"
+        android:id="@+id/profileFragment"
         android:enabled="true"
         android:icon="@drawable/ic_person"
-        android:title="Profile"
+        android:title="@string/profile"
         />
 
 </menu>

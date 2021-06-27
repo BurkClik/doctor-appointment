@@ -4,44 +4,50 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.doctorappointment.common.BaseViewModel
+import com.example.doctorappointment.common.Resource
 import com.example.doctorappointment.data.local.Category
 import com.example.doctorappointment.data.local.CategoryDatasource
-import com.example.doctorappointment.data.remote.ClientService
-import com.example.doctorappointment.data.remote.User
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.doctorappointment.domain.UserUseCase
+import com.example.doctorappointment.domain.model.User
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val userUseCase: UserUseCase) : BaseViewModel() {
     private val _categories = MutableLiveData<List<Category>>()
-    private val _remoteDoctors = MutableLiveData<List<User>>()
+    private val _remoteDoctors = MutableLiveData<List<User>?>()
 
     val categories: LiveData<List<Category>> = _categories
-    val remoteDoctors: LiveData<List<User>> = _remoteDoctors
+    val remoteDoctors: LiveData<List<User>?> = _remoteDoctors
+
+    val itemClickListener: (User) -> Unit = {
+        val action = HomeFragmentDirections.actionHomeFragmentToDoctorDetailFragment(doctorId = it._id)
+        navigation.navigate(action)
+    }
 
     init {
         listOfCategories()
-        getDoctor()
+        fetchTopRatedDoctor()
     }
 
-    private fun getDoctor() {
-        ClientService.retrofitService.getTopRatedDoctors(5)
-            .enqueue(object : Callback<List<User>> {
-                override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
-                    Log.i("Burak", "$response")
-                    //Log.i("Burak", "${response.body()}")
-                    if (response.isSuccessful and response.body()!!.isNotEmpty()) {
-                        _remoteDoctors.value = response.body()
-                    }
+    private fun fetchTopRatedDoctor() {
+        viewModelScope.launch {
+            userUseCase.getTopRatedDoctor(5).collect { resource ->
+                when (resource) {
+                    is Resource.Success -> _remoteDoctors.value = resource.data
+                    is Resource.Error -> Log.i("Burak", "Hata")
+                    is Resource.Loading -> Log.i("Burak", "Loading")
                 }
-
-                override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                    Log.e("Burak", t.message.toString())
-                }
-            })
+            }
+        }
     }
 
-    private fun listOfCategories() : List<Category> {
+    private fun listOfCategories(): List<Category> {
         _categories.value = CategoryDatasource().loadCategoryList()
         return _categories.value!!
     }

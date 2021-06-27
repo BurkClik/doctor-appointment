@@ -9,34 +9,40 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.doctorappointment.R
-import com.example.doctorappointment.adapter.CategoryAdapter
-import com.example.doctorappointment.adapter.DoctorAdapter
-import com.example.doctorappointment.data.local.CategoryDatasource
+import com.example.doctorappointment.common.BaseFragment
+import com.example.doctorappointment.common.GenericAdapter
+import com.example.doctorappointment.data.local.Category
+import com.example.doctorappointment.data.local.JwtStore
 import com.example.doctorappointment.databinding.FragmentHomeBinding
+import com.example.doctorappointment.domain.model.User
+import dagger.hilt.android.AndroidEntryPoint
 
-class HomeFragment : Fragment() {
+@AndroidEntryPoint
+class HomeFragment : BaseFragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     // ViewModel
-    private val viewModel by viewModels<HomeViewModel>()
+    override val viewModel by viewModels<HomeViewModel>()
 
     // Category
-    private val categoryAdapter = CategoryAdapter()
+    private val categoryAdapter = GenericAdapter<Category>(R.layout.item_category)
 
     // Doctor
-    private val doctorAdapter = DoctorAdapter()
+    private val doctorAdapter = GenericAdapter<User>(R.layout.item_doctor)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.i("Burak", "${JwtStore(requireContext()).loadJwt()}")
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         // Initialize category data
         binding.recyclerviewCard.apply {
@@ -54,19 +60,10 @@ class HomeFragment : Fragment() {
             addItemDecoration(DoctorDecorator())
         }
 
+        doctorAdapter.itemClickListener = viewModel.itemClickListener
+
         viewModel.remoteDoctors.observe(viewLifecycleOwner) {
             doctorAdapter.submitList(it)
-        }
-
-        doctorAdapter.itemClickListener = {
-            val action = HomeFragmentDirections.actionHomeFragmentToDoctorDetailFragment(
-                doctorName = it.name,
-                doctorTitle = it.doctor.title,
-                doctorDepartment = it.doctor.department,
-                doctorAbout = it.doctor.about,
-                doctorImage = R.drawable.doctor_image
-            )
-            findNavController().navigate(action)
         }
     }
 

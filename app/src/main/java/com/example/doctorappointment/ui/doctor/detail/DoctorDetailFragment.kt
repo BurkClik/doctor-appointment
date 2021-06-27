@@ -4,46 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.example.doctorappointment.R
+import com.example.doctorappointment.common.BaseFragment
 import com.example.doctorappointment.common.ext.capitalizeEachWord
 import com.example.doctorappointment.databinding.FragmentDoctorDetailBinding
+import com.example.doctorappointment.databinding.FragmentRegisterBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class DoctorDetailFragment : Fragment() {
-    private var _binding: FragmentDoctorDetailBinding? = null
-    private val binding get() = _binding!!
+@AndroidEntryPoint
+class DoctorDetailFragment : BaseFragment() {
 
-    private val args: DoctorDetailFragmentArgs by navArgs()
+    override val viewModel: DoctorDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDoctorDetailBinding.inflate(inflater, container, false)
+        val binding: FragmentDoctorDetailBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_doctor_detail, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val doctorName = args.doctorName
-        val doctorTitle = args.doctorTitle
-        val doctorDepartment = args.doctorDepartment
-        val doctorAbout = args.doctorAbout
-        val doctorImage = args.doctorImage
-
-        binding.apply {
-            textViewDoctorName.text = doctorName.capitalizeEachWord()
-            textViewDoctorTitle.text = doctorTitle
-            textViewDoctorDepartment.text = doctorDepartment
-            textViewDoctorAbout.text = doctorAbout
-            imageViewProfileImage.setImageResource(doctorImage)
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

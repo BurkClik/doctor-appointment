@@ -1,25 +1,31 @@
 package com.example.doctorappointment.ui.doctor.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.doctorappointment.adapter.DoctorAdapter
+import com.example.doctorappointment.R
+import com.example.doctorappointment.common.BaseFragment
+import com.example.doctorappointment.common.GenericAdapter
 import com.example.doctorappointment.databinding.FragmentDoctorListBinding
+import com.example.doctorappointment.domain.model.User
 import com.example.doctorappointment.ui.home.DoctorDecorator
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-class DoctorListFragment : Fragment() {
+@AndroidEntryPoint
+class DoctorListFragment : BaseFragment() {
     private var _binding: FragmentDoctorListBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: DoctorListViewModel by viewModels()
+    override val viewModel: DoctorListViewModel by viewModels()
 
-    private val doctorAdapter = DoctorAdapter()
+    private val doctorAdapter = GenericAdapter<User>(R.layout.item_doctor)
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +51,8 @@ class DoctorListFragment : Fragment() {
                 )
             )
         }
+
+        doctorAdapter.itemClickListener = viewModel.itemClickListener
 
         viewModel.currentQuery.observe(viewLifecycleOwner) {
             doctorAdapter.submitList(it)

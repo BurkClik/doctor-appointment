@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="82dp"
-    android:layout_height="84dp"
-    android:orientation="vertical"
-    android:backgroundTint="@color/white"
-    app:cardCornerRadius="10dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+    <data>
+        <variable
+            name="baseModel"
+            type="com.example.doctorappointment.data.local.Category" />
+    </data>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/category_image"
-            app:srcCompat="@drawable/ic_category_mage"
-            android:layout_marginBottom="8dp"
-            android:layout_width="34dp"
-            android:layout_height="34dp" />
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="82dp"
+        android:layout_height="84dp"
+        android:orientation="vertical"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="10dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <TextView
-            android:id="@+id/category_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_sans"
-            android:textSize="12sp"
-            android:text="Dentist"
-            android:textColor="#FF475464" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/category_image"
+                setImage="@{baseModel.categoryImage}"
+                android:layout_marginBottom="8dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp" />
 
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/category_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans"
+                android:textSize="12sp"
+                android:text="@{baseModel.categoryTitle}"
+                android:textColor="#FF475464" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.cardview.widget.CardView>
+</layout>
