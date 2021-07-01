@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.doctorappointment.common.navigation.NavigationObserver
+import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment : Fragment() {
     abstract val viewModel: BaseViewModel
@@ -16,4 +17,8 @@ abstract class BaseFragment : Fragment() {
         navigationObserver.observer(viewModel.navigation, findNavController(), viewLifecycleOwner)
     }
 
+    fun showSnack(message: String, view: View) {
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+            .show()
+    }
 }

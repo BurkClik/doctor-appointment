@@ -18,6 +18,12 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_hospitalFragment2"
+            app:destination="@id/hospitalFragment2" />
+        <action
+            android:id="@+id/action_homeFragment_to_departmentFragment"
+            app:destination="@id/departmentFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -55,6 +61,15 @@
         <argument
             android:name="doctorId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_doctorDetailFragment_to_appointmentFragment"
+            app:destination="@id/appointmentFragment" />
+        <argument
+            android:name="doctorName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_doctorDetailFragment_to_hospitalFragment2"
+            app:destination="@id/hospitalFragment2" />
     </fragment>
     <fragment
         android:id="@+id/doctorSearchFragment"
@@ -78,5 +93,59 @@
         <action
             android:id="@+id/logoutSuccess"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_hospitalFragment2"
+            app:destination="@id/hospitalFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/appointmentFragment"
+        android:name="com.example.doctorappointment.ui.appointment.AppointmentFragment"
+        android:label="AppointmentFragment" >
+        <argument
+            android:name="doctorId"
+            app:argType="string" />
+        <argument
+            android:name="doctorName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_appointmentFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph"/>
+    </fragment>
+    <fragment
+        android:id="@+id/hospitalFragment2"
+        android:name="com.example.doctorappointment.ui.hospitals.HospitalFragment"
+        android:label="HospitalFragment" >
+        <action
+            android:id="@+id/action_hospitalFragment2_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_hospitalFragment2_to_doctorDetailFragment"
+            app:destination="@id/doctorDetailFragment" />
+        <action
+            android:id="@+id/action_hospitalFragment2_to_hospitalDoctorsFragment"
+            app:destination="@id/hospitalDoctorsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hospitalDoctorsFragment"
+        android:name="com.example.doctorappointment.ui.hospitals.HospitalDoctorsFragment"
+        android:label="HospitalDoctorsFragment" >
+        <argument
+            android:name="hospitalName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_hospitalDoctorsFragment_to_doctorDetailFragment"
+            app:destination="@id/doctorDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/departmentFragment"
+        android:name="com.example.doctorappointment.ui.doctor.department.DepartmentFragment"
+        android:label="DepartmentFragment" >
+        <argument
+            android:name="departmentName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_departmentFragment_to_doctorDetailFragment"
+            app:destination="@id/doctorDetailFragment" />
     </fragment>
 </navigation>

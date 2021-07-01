@@ -29,9 +29,31 @@ class JwtStore @Inject constructor(@ApplicationContext context: Context) {
         remove(PREFS_KEY_JWT)
     }
 
+    fun saveName(name: String) = prefs.edit(commit = true) {
+        putString(PREFS_KEY_NAME, name)
+    }
+
+    fun loadName(): String? = prefs.getString(PREFS_KEY_NAME, null)
+
+    fun deleteName() = prefs.edit(commit = true) {
+        remove(PREFS_KEY_NAME)
+    }
+
+    fun saveId(id: String) = prefs.edit(commit = true) {
+        putString(PREFS_KEY_ID, id)
+    }
+
+    fun loadId(): String? = prefs.getString(PREFS_KEY_ID, null)
+
+    fun deleteId() = prefs.edit(commit = true) {
+        remove(PREFS_KEY_ID)
+    }
+
     companion object {
         const val PREFS_FILE_NAME = "jwt_store"
         const val PREFS_KEY_JWT = "jwt"
         const val PREFS_KEY_MAIL = "mail"
+        const val PREFS_KEY_NAME = "name"
+        const val PREFS_KEY_ID = "id"
     }
 }

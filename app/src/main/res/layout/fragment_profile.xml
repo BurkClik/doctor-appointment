@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
+
         <variable
             name="viewModel"
             type="com.example.doctorappointment.ui.profile.ProfileViewModel" />
@@ -39,6 +41,7 @@
             android:layout_marginTop="49dp"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/doctor_image"
             tools:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
@@ -47,9 +50,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/poppins"
+            android:text="@{viewModel.user.name}"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:text="@{viewModel.user.name}"
             app:layout_constraintStart_toEndOf="@id/imageViewProfileImage"
             app:layout_constraintTop_toTopOf="@id/imageViewProfileImage"
             tools:text="Dr. Ted Mosby" />
@@ -59,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:text="@{viewModel.user.doctor.title}"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/textViewDoctorName"
@@ -70,6 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
+            android:text="@{viewModel.user.doctor.department}"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/imageViewProfileImage"
@@ -81,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/upcoming_appointments"
+            android:text="Appointments"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/view" />
@@ -89,35 +94,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewUpcomingAppointments"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="0dp"
             android:layout_marginTop="6dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/textViewPastAppointments"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/textViewUpcomingAppointments"
             tools:listitem="@layout/item_appointment" />
 
-        <TextView
-            android:id="@+id/textViewPastAppointments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/past_appointments"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/recyclerViewUpcomingAppointments" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewPastAppointments"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="6dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-            app:layout_constraintStart_toStartOf="@id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/textViewPastAppointments"
-            tools:listitem="@layout/item_appointment" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineStart"

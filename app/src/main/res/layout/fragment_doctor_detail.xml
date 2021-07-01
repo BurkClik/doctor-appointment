@@ -30,6 +30,7 @@
             android:layout_marginTop="49dp"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/doctor_image"
             tools:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
@@ -93,6 +94,20 @@
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@id/textViewDoctorAboutTitle"
             tools:text="Buraya Uzunca Bir yazı gelecek" />
+
+        <Button
+            android:id="@+id/buttonAppointment"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/primary_color"
+            android:onClick="@{() -> viewModel.appointment()}"
+            android:text="Appointment"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineStart"

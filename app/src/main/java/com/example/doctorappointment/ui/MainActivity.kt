@@ -2,22 +2,16 @@ package com.example.doctorappointment.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavGraph
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.doctorappointment.R
 import com.example.doctorappointment.data.local.JwtStore
 import com.example.doctorappointment.databinding.ActivityMainBinding
-import com.example.doctorappointment.ui.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
-            if (nd.id == R.id.doctorDetailFragment || nd.id == R.id.loginFragment || nd.id == R.id.registerFragment) {
+            if (nd.id == R.id.doctorDetailFragment || nd.id == R.id.loginFragment || nd.id == R.id.registerFragment || nd.id == R.id.appointmentFragment) {
                 binding.bottomNavigation.visibility = View.GONE
             } else {
                 binding.bottomNavigation.visibility = View.VISIBLE

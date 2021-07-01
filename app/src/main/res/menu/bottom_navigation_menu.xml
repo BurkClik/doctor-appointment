@@ -14,7 +14,7 @@
         android:title="@string/doctor" />
 
     <item
-        android:id="@+id/hospitalListFragment"
+        android:id="@+id/hospitalFragment2"
         android:enabled="true"
         android:icon="@drawable/ic_hospital"
         android:title="@string/hospital"

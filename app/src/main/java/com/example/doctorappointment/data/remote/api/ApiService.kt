@@ -1,5 +1,8 @@
 package com.example.doctorappointment.data.remote.api
 
+import com.example.doctorappointment.data.remote.model.AppointmentRequest
+import com.example.doctorappointment.data.remote.model.AppointmentResponse
+import com.example.doctorappointment.data.remote.model.HospitalResponse
 import com.example.doctorappointment.data.remote.model.LoginRequest
 import com.example.doctorappointment.data.remote.model.LoginResponse
 import com.example.doctorappointment.data.remote.model.SignUpRequest
@@ -21,8 +24,17 @@ interface ApiService {
     @GET("/search/doctor")
     suspend fun searchDoctor(@Query("doctor") doctorQuery: String): List<UserResponse>
 
+    @GET("/search/hospital")
+    suspend fun searchHospital(@Query("hospital") hospitalQuery: String): List<UserResponse>
+
+    @GET("/hospital")
+    suspend fun getAllHospitals(): List<HospitalResponse>
+
     @GET("/user")
     suspend fun getUser(@Query("mail") user: String): List<UserResponse>
+
+    @GET("/doctor")
+    suspend fun getProfile(@Query("_id") _id: String): AppointmentResponse
 
     @GET("/doctor")
     suspend fun getDoctor(@Query("_id") _id: String): UserResponse
@@ -32,4 +44,10 @@ interface ApiService {
 
     @POST("/signup")
     suspend fun signUp(@Body signUpRequest: SignUpRequest): Response<LoginResponse>
+
+    @POST("/appointment")
+    suspend fun getAppointment(
+        @Query("_id") _id: String,
+        @Body appointmentRequest: AppointmentRequest
+    ): Response<AppointmentResponse>
 }

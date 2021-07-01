@@ -25,6 +25,7 @@ class DoctorDetailViewModel @Inject constructor(
     val doctor: LiveData<User?> = _doctor
 
     private val doctorId: String = savedStateHandle["doctorId"]!!
+    private val doctorName: String = savedStateHandle["doctorName"]!!
 
     init {
         Log.i("Burak", "Detail -> $doctorId")
@@ -39,5 +40,10 @@ class DoctorDetailViewModel @Inject constructor(
                 is Resource.Loading -> Log.i("Burak", "Loading")
             }
         }
+    }
+
+    fun appointment() {
+        val action = DoctorDetailFragmentDirections.actionDoctorDetailFragmentToAppointmentFragment(doctorId, doctorName)
+        navigation.navigate(action)
     }
 }

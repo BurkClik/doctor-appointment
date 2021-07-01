@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
             android:hint="@string/login_mail_hint_text"
+            app:error="@{viewModel.identifierErrorMessage}"
             app:startIconDrawable="@drawable/ic_mail">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -56,6 +57,7 @@
             android:layout_marginTop="24dp"
             android:hint="@string/login_password_hint_text"
             app:endIconMode="password_toggle"
+            app:error="@{viewModel.passwordErrorMessage}"
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText

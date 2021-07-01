@@ -27,7 +27,7 @@ class DoctorListViewModel @Inject constructor(private val userUseCase: UserUseCa
     val newQuery: LiveData<String> = _newQuery
 
     val itemClickListener: (User) -> Unit = {
-        val action = DoctorListFragmentDirections.actionDoctorSearchFragmentToDoctorDetailFragment(it._id)
+        val action = DoctorListFragmentDirections.actionDoctorSearchFragmentToDoctorDetailFragment(it._id, it.name)
         navigation.navigate(action)
     }
 

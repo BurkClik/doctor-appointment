@@ -3,6 +3,8 @@ package com.example.doctorappointment.data
 import android.util.Log
 import com.example.doctorappointment.common.Resource
 import com.example.doctorappointment.data.remote.api.ApiService
+import com.example.doctorappointment.data.remote.model.AppointmentRequest
+import com.example.doctorappointment.data.remote.model.AppointmentResponse
 import com.example.doctorappointment.data.remote.model.LoginRequest
 import com.example.doctorappointment.data.remote.model.LoginResponse
 import com.example.doctorappointment.data.remote.model.SignUpRequest
@@ -52,6 +54,32 @@ class AuthRepository @Inject constructor(private val apiService: ApiService) {
         emit(
             when (response?.code()) {
                 201 -> Resource.Success(response.body())
+                else -> Resource.Error(null)
+            }
+        )
+    }
+
+    fun getAppointment(
+        id: String,
+        hour: String,
+        date: String,
+        patientName: String,
+        doctorName: String
+    ): Flow<Resource<AppointmentResponse?>> = flow {
+        val request = AppointmentRequest(hour, date, patientName, doctorName)
+
+        val response = try {
+            emit(Resource.Loading)
+            apiService.getAppointment(id, request)
+        } catch (ex: Exception) {
+            null
+        }
+
+        Log.i("Burak", "${response?.code()}")
+
+        emit(
+            when (response?.code()) {
+                200 -> Resource.Success(response.body())
                 else -> Resource.Error(null)
             }
         )

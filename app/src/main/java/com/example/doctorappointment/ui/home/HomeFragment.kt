@@ -2,18 +2,16 @@ package com.example.doctorappointment.ui.home
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.doctorappointment.R
 import com.example.doctorappointment.common.BaseFragment
 import com.example.doctorappointment.common.GenericAdapter
 import com.example.doctorappointment.data.local.Category
-import com.example.doctorappointment.data.local.JwtStore
 import com.example.doctorappointment.databinding.FragmentHomeBinding
+import com.example.doctorappointment.data.local.JwtStore
 import com.example.doctorappointment.domain.model.User
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,6 +59,7 @@ class HomeFragment : BaseFragment() {
         }
 
         doctorAdapter.itemClickListener = viewModel.itemClickListener
+        categoryAdapter.itemClickListener = viewModel.itemClickListenerCategory
 
         viewModel.remoteDoctors.observe(viewLifecycleOwner) {
             doctorAdapter.submitList(it)

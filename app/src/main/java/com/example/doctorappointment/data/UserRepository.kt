@@ -2,6 +2,7 @@ package com.example.doctorappointment.data
 
 import com.example.doctorappointment.common.Resource
 import com.example.doctorappointment.data.remote.AppointmentDataSource
+import com.example.doctorappointment.data.remote.model.AppointmentResponse
 import com.example.doctorappointment.data.remote.model.UserResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -21,6 +22,12 @@ class UserRepository @Inject constructor(private val appointmentDataSource: Appo
         Resource.Success(it)
     }
 
+    fun getSearchHospital(hospitalQuery: String): Flow<Resource<List<UserResponse>>> = flow {
+        emit(appointmentDataSource.getSearchHospital(hospitalQuery = hospitalQuery))
+    }.map {
+        Resource.Success(it)
+    }
+
     fun getUser(user: String): Flow<Resource<List<UserResponse>>> = flow {
         emit(appointmentDataSource.getUserDetail(user))
     }.map {
@@ -29,6 +36,12 @@ class UserRepository @Inject constructor(private val appointmentDataSource: Appo
 
     fun getDoctorDetail(id: String): Flow<Resource<UserResponse>> = flow {
         emit(appointmentDataSource.getDoctorDetail(id))
+    }.map {
+        Resource.Success(it)
+    }
+
+    fun getProfile(id: String): Flow<Resource<AppointmentResponse>> = flow {
+        emit(appointmentDataSource.getProfile(id))
     }.map {
         Resource.Success(it)
     }

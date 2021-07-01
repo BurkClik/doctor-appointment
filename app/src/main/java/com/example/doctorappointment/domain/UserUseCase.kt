@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.doctorappointment.common.Resource
 import com.example.doctorappointment.common.map
 import com.example.doctorappointment.data.UserRepository
+import com.example.doctorappointment.data.remote.model.AppointmentResponse
 import com.example.doctorappointment.domain.mapper.DoctorDetailMapper
 import com.example.doctorappointment.domain.mapper.UserMapper
 import com.example.doctorappointment.domain.model.User
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
+import retrofit2.Response
 import javax.inject.Inject
 
 class UserUseCase @Inject constructor(
@@ -42,6 +44,17 @@ class UserUseCase @Inject constructor(
         .catch { Resource.Error(it) }
         .flowOn(Dispatchers.Default)
 
+    fun getSearchHospital(hospitalQuery: String): Flow<Resource<List<User>>> = userRepository
+        .getSearchHospital(hospitalQuery)
+        .map {
+            it.map { userResponse ->
+                userMapper.mapFrom(userResponse)
+            }
+        }
+        .onStart { Resource.Loading }
+        .catch { Resource.Error(it) }
+        .flowOn(Dispatchers.Default)
+
     fun getUser(user: String): Flow<Resource<List<User>>> = userRepository
         .getUser(user)
         .map {
@@ -62,6 +75,19 @@ class UserUseCase @Inject constructor(
         .map {
             it.map { userResponse ->
                 doctorDetailMapper.mapFrom(userResponse)
+            }
+        }
+        .onStart { Resource.Loading }
+        .catch { Resource.Error(it) }
+        .flowOn(Dispatchers.Default)
+
+
+    fun getProfile(id: String): Flow<Resource<AppointmentResponse>> = userRepository
+        .getProfile(id)
+        .map {
+            it.map { appointmentResponse ->
+                Log.i("Burak", "Profile Success")
+                appointmentResponse
             }
         }
         .onStart { Resource.Loading }

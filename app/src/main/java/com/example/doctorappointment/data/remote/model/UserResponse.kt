@@ -16,5 +16,5 @@ data class UserResponse(
     @SerializedName("doctor")
     val doctor: Doctor,
     @SerializedName("mail")
-    val mail: String,
+    val mail: String
 )

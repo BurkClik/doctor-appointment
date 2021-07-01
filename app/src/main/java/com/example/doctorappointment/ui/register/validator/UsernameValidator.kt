@@ -1,15 +1,16 @@
 package com.example.doctorappointment.ui.register.validator
 
-class UsernameValidator {
-    fun validate(username: String?) = when {
-        username == null -> "Username cannot be empty"
-        username.isBlank() -> "Username cannot be empty"
-        username.length < 3 -> "Username cannot be this short"
-        !username.containsValidCharacters() -> "Username can only include lowercase, digit and _ character"
-        else -> null
-    }
+import androidx.annotation.StringRes
+import com.example.doctorappointment.R
+import com.example.doctorappointment.common.Validator
 
-    private fun String.containsValidCharacters() = all {
-        it.isLowerCase() || it.isDigit() || it == '_'
+class UsernameValidator : Validator {
+    @StringRes
+    override fun validate(field: String)= when {
+        field.isEmpty() -> R.string.username_is_required
+        field.length < 3 -> R.string.username_is_too_short
+        field.length > 20 -> R.string.username_is_too_long
+        !field.replace('_', 'a').all { it.isLetterOrDigit() } -> R.string.username_not_consist
+        else -> null
     }
 }

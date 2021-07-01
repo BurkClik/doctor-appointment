@@ -10,21 +10,40 @@ import androidx.fragment.app.viewModels
 import com.example.doctorappointment.R
 import com.example.doctorappointment.common.BaseFragment
 import com.example.doctorappointment.common.BaseViewModel
+import com.example.doctorappointment.common.GenericAdapter
+import com.example.doctorappointment.data.remote.model.AppointmentDemo
 import com.example.doctorappointment.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment() {
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
+
     override val viewModel: ProfileViewModel by viewModels()
+
+    private val appointmentAdapter = GenericAdapter<AppointmentDemo>(R.layout.item_appointment)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.recyclerViewUpcomingAppointments.apply {
+            adapter = appointmentAdapter
+        }
+
+        viewModel.appointment.observe(viewLifecycleOwner) {
+            appointmentAdapter.submitList(it.reversed())
+        }
     }
 }

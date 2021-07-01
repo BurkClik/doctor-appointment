@@ -4,6 +4,13 @@
 
     <data>
 
+        <variable
+            name="baseModel"
+            type="com.example.doctorappointment.data.remote.model.AppointmentDemo" />
+
+        <variable
+            name="viewModel"
+            type="com.example.doctorappointment.ui.profile.ProfileViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,40 +28,67 @@
                 android:layout_marginStart="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/doctor_image" />
+
+            <TextView
+                android:id="@+id/textViewDoctorTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="Doctor: "
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@id/imageViewDoctorImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textViewDoctorName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintStart_toEndOf="@id/imageViewDoctorImage"
+                android:text="@{baseModel.doctorName}"
+                app:layout_constraintStart_toEndOf="@id/textViewDoctorTitle"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Dr. Kathryn Murphy" />
 
-            <TextView
-                android:id="@+id/textViewDoctorDepartment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/textViewDoctorName"
-                app:layout_constraintTop_toBottomOf="@id/textViewDoctorName"
-                tools:text="Dentist" />
 
             <TextView
-                android:id="@+id/textViewDoctorHospital"
+                android:id="@+id/textViewPatientTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/textViewDoctorDepartment"
-                app:layout_constraintStart_toEndOf="@id/textViewDoctorDepartment"
-                tools:text="Stillwater Clinic" />
+                android:text="Patient: "
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/textViewDoctorTitle"
+                app:layout_constraintTop_toBottomOf="@id/textViewDoctorTitle" />
+
+            <TextView
+                android:id="@+id/textViewPatientName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{baseModel.patientName}"
+                tools:text="Burak Çelik"
+                app:layout_constraintStart_toStartOf="@id/textViewDoctorName"
+                app:layout_constraintTop_toBottomOf="@id/textViewDoctorName" />
 
             <TextView
                 android:id="@+id/textViewAppointmentDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/textViewDoctorDepartment"
-                app:layout_constraintTop_toBottomOf="@id/textViewDoctorDepartment"
-                tools:text="24.04.2021 - 13:15" />
+                android:text="@{baseModel.date}"
+                app:layout_constraintStart_toStartOf="@id/textViewPatientName"
+                app:layout_constraintTop_toBottomOf="@id/textViewPatientName" />
+
+            <TextView
+                android:id="@+id/textViewAppointmentHour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{baseModel.hour}"
+                app:layout_constraintBottom_toBottomOf="@id/textViewAppointmentDate"
+                app:layout_constraintStart_toEndOf="@id/textViewAppointmentDate" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

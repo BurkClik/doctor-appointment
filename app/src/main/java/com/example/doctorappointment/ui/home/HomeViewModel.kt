@@ -26,13 +26,19 @@ class HomeViewModel @Inject constructor(private val userUseCase: UserUseCase) : 
     val remoteDoctors: LiveData<List<User>?> = _remoteDoctors
 
     val itemClickListener: (User) -> Unit = {
-        val action = HomeFragmentDirections.actionHomeFragmentToDoctorDetailFragment(doctorId = it._id)
+        val action = HomeFragmentDirections.actionHomeFragmentToDoctorDetailFragment(doctorId = it._id, it.name)
+        navigation.navigate(action)
+    }
+
+    val itemClickListenerCategory: (Category) -> Unit = {
+        val action = HomeFragmentDirections.actionHomeFragmentToDepartmentFragment(it.categoryTitle)
         navigation.navigate(action)
     }
 
     init {
         listOfCategories()
         fetchTopRatedDoctor()
+        Log.i("Burak", "${_remoteDoctors.value}")
     }
 
     private fun fetchTopRatedDoctor() {

@@ -1,26 +1,16 @@
 package com.example.doctorappointment.ui.register.validator
 
-class EmailValidator {
-    fun validate(field: String?) = when {
-        field == null -> "Email cannot be empty"
-        field.isBlank() -> "Email cannot be empty"
-        field.length < 5 -> "Email cannot be this short"
-        !field.contains("@")
-                || !field.contains(".") -> "Invalid email"
+import androidx.annotation.StringRes
+import com.example.doctorappointment.R
+import com.example.doctorappointment.common.Validator
+
+class EmailValidator : Validator {
+    @StringRes
+    override fun validate(field: String) = when {
+        field.isEmpty() -> R.string.this_field_is_required
+        !field.contains('@')
+                || !field.split('@')[1].contains('.')
+                || field.split('@')[0].length !in 6..50 -> R.string.email_is_invalid
         else -> null
     }
-
-    fun isEmailNull(email: String?): Boolean = email == null
-
-    /**
-     * Given a [email] to this function
-     * @return false if the email is empty
-     * */
-    fun isEmailEmpty(email: String?): Boolean = email!!.isNotEmpty() and email.isNotBlank()
-
-    /**
-     * Given a [email] to this function
-     * @return false if it is not contains @ or .
-     * */
-    fun containsAtAndDot(email: String?): Boolean = email!!.contains('@') and email.contains('.')
 }
