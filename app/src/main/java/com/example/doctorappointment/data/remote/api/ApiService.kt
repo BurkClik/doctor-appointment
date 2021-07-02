@@ -5,6 +5,7 @@ import com.example.doctorappointment.data.remote.model.AppointmentResponse
 import com.example.doctorappointment.data.remote.model.HospitalResponse
 import com.example.doctorappointment.data.remote.model.LoginRequest
 import com.example.doctorappointment.data.remote.model.LoginResponse
+import com.example.doctorappointment.data.remote.model.ReviewRequest
 import com.example.doctorappointment.data.remote.model.SignUpRequest
 import com.example.doctorappointment.data.remote.model.UserResponse
 import retrofit2.Call
@@ -44,6 +45,12 @@ interface ApiService {
 
     @POST("/signup")
     suspend fun signUp(@Body signUpRequest: SignUpRequest): Response<LoginResponse>
+
+    @POST("/review")
+    suspend fun review(
+        @Query("_id") _id: String,
+        @Body reviewRequest: ReviewRequest
+    ): Response<AppointmentResponse>
 
     @POST("/appointment")
     suspend fun getAppointment(

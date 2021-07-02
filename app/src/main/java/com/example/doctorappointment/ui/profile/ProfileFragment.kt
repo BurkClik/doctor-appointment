@@ -12,7 +12,10 @@ import com.example.doctorappointment.common.BaseFragment
 import com.example.doctorappointment.common.BaseViewModel
 import com.example.doctorappointment.common.GenericAdapter
 import com.example.doctorappointment.data.remote.model.AppointmentDemo
+import com.example.doctorappointment.data.remote.model.Review
 import com.example.doctorappointment.databinding.FragmentProfileBinding
+import com.example.doctorappointment.domain.model.ReviewDomain
+import com.example.doctorappointment.ui.home.DoctorDecorator
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 
@@ -24,6 +27,7 @@ class ProfileFragment : BaseFragment() {
     override val viewModel: ProfileViewModel by viewModels()
 
     private val appointmentAdapter = GenericAdapter<AppointmentDemo>(R.layout.item_appointment)
+    private val reviewAdapter = GenericAdapter<ReviewDomain>(R.layout.item_review)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +46,17 @@ class ProfileFragment : BaseFragment() {
             adapter = appointmentAdapter
         }
 
+        binding.recyclerViewReview.apply {
+            adapter = reviewAdapter
+            addItemDecoration(DoctorDecorator())
+        }
+
         viewModel.appointment.observe(viewLifecycleOwner) {
             appointmentAdapter.submitList(it.reversed())
+        }
+
+        viewModel.reviews.observe(viewLifecycleOwner) {
+            reviewAdapter.submitList(it)
         }
     }
 }

@@ -16,5 +16,9 @@ data class UserResponse(
     @SerializedName("doctor")
     val doctor: Doctor,
     @SerializedName("mail")
-    val mail: String
+    val mail: String,
+    @SerializedName("review")
+    val review: List<Review> = ArrayList(),
+    @SerializedName("appointment")
+    val appointment: List<AppointmentDemo> = ArrayList()
 )

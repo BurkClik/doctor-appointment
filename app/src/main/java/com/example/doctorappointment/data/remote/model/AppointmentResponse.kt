@@ -19,14 +19,8 @@ data class AppointmentResponse(
     @SerializedName("mail")
     val mail: String,
     @SerializedName("appointment")
-    val appointment: List<AppointmentDemo> = ArrayList()
+    val appointment: List<AppointmentDemo> = ArrayList(),
+    @SerializedName("review")
+    val review: List<Review> = ArrayList(),
 )
 
-data class AppointmentDemo(
-    val hour: String,
-    val date: String,
-    @SerializedName("patient_name")
-    val patientName: String,
-    @SerializedName("doctor_name")
-    val doctorName: String,
-) : BindableItem

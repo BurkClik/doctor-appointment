@@ -9,6 +9,7 @@ import com.example.doctorappointment.common.BaseViewModel
 import com.example.doctorappointment.common.Resource
 import com.example.doctorappointment.domain.UserUseCase
 import com.example.doctorappointment.domain.model.User
+import com.example.doctorappointment.ui.doctor.detail.DoctorDetailFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

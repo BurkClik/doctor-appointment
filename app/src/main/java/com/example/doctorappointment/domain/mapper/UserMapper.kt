@@ -7,7 +7,10 @@ import com.example.doctorappointment.domain.model.DoctorDemo
 import com.example.doctorappointment.domain.model.User
 import javax.inject.Inject
 
-class UserMapper @Inject constructor(private val doctorMapper: DoctorMapper) :
+class UserMapper @Inject constructor(
+    private val doctorMapper: DoctorMapper,
+    private val reviewMapper: ReviewMapper
+) :
     Mapper<List<UserResponse>, List<User>> {
     override fun mapFrom(type: List<UserResponse>): List<User> {
         return type.map {
@@ -18,7 +21,9 @@ class UserMapper @Inject constructor(private val doctorMapper: DoctorMapper) :
                 mail = it.mail,
                 name = it.name.capitalizeEachWord(),
                 isDoctor = it.isDoctor,
-                doctor = doctorMapper.mapFrom(it.doctor)
+                doctor = doctorMapper.mapFrom(it.doctor),
+                review = reviewMapper.mapFrom(it.review),
+                appointment = it.appointment,
             )
         }
     }

@@ -7,7 +7,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.doctorappointment.common.BaseViewModel
 import com.example.doctorappointment.common.Resource
+import com.example.doctorappointment.data.remote.model.Review
 import com.example.doctorappointment.domain.UserUseCase
+import com.example.doctorappointment.domain.model.ReviewDomain
 import com.example.doctorappointment.domain.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -24,6 +26,9 @@ class DoctorDetailViewModel @Inject constructor(
     private var _doctor = MutableLiveData<User?>()
     val doctor: LiveData<User?> = _doctor
 
+    private val _reviews = MutableLiveData<List<ReviewDomain>?>()
+    val reviews: LiveData<List<ReviewDomain>?> = _reviews
+
     private val doctorId: String = savedStateHandle["doctorId"]!!
     private val doctorName: String = savedStateHandle["doctorName"]!!
 
@@ -35,7 +40,10 @@ class DoctorDetailViewModel @Inject constructor(
     private fun fetchDoctorDetail() = viewModelScope.launch {
         userUseCase.getDoctorDetail(doctorId).collect { resource ->
             when (resource) {
-                is Resource.Success -> _doctor.value = resource.data
+                is Resource.Success -> {
+                    _doctor.value = resource.data
+                    _reviews.value = resource.data.review
+                }
                 is Resource.Error -> Log.i("Burak", resource.exception?.message.toString())
                 is Resource.Loading -> Log.i("Burak", "Loading")
             }
@@ -43,7 +51,18 @@ class DoctorDetailViewModel @Inject constructor(
     }
 
     fun appointment() {
-        val action = DoctorDetailFragmentDirections.actionDoctorDetailFragmentToAppointmentFragment(doctorId, doctorName)
+        val action = DoctorDetailFragmentDirections.actionDoctorDetailFragmentToAppointmentFragment(
+            doctorId,
+            doctorName
+        )
+        navigation.navigate(action)
+    }
+
+    fun makeReview() {
+        val action = DoctorDetailFragmentDirections.actionDoctorDetailFragmentToReviewFragment(
+            doctorId,
+            doctorName
+        )
         navigation.navigate(action)
     }
 }

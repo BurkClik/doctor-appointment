@@ -11,6 +11,8 @@ import com.example.doctorappointment.data.local.JwtStore
 import com.example.doctorappointment.data.remote.model.AppointmentDemo
 import com.example.doctorappointment.data.remote.model.AppointmentResponse
 import com.example.doctorappointment.domain.UserUseCase
+import com.example.doctorappointment.domain.mapper.ReviewMapper
+import com.example.doctorappointment.domain.model.ReviewDomain
 import com.example.doctorappointment.domain.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -21,6 +23,7 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val jwtStore: JwtStore,
     private val userUseCase: UserUseCase,
+    private val reviewMapper: ReviewMapper,
 ) : BaseViewModel() {
 
     private var _user = MutableLiveData<AppointmentResponse?>()
@@ -28,6 +31,9 @@ class ProfileViewModel @Inject constructor(
 
     private val _appointments = MutableLiveData<List<AppointmentDemo>>()
     val appointment: LiveData<List<AppointmentDemo>> = _appointments
+
+    private val _reviews = MutableLiveData<List<ReviewDomain>?>()
+    val reviews: LiveData<List<ReviewDomain>?> = _reviews
 
     init {
         getUser()
@@ -54,6 +60,7 @@ class ProfileViewModel @Inject constructor(
                     _user.value = resource.data
                     Log.i("Burak", "${user.value!!.appointment}")
                     _appointments.value = user.value!!.appointment
+                    _reviews.value = reviewMapper.mapFrom(user.value!!.review)
                 }
                 is Resource.Error -> Log.i("Burak", "${resource.exception?.message}")
                 is Resource.Loading -> Log.i("Burak", "Loading")

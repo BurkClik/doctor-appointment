@@ -41,4 +41,6 @@
     <string name="password_is_too_short">Password is too short</string>
     <string name="password_contain_check">Password must contain one digit, one uppercase letter, one lowercase letter and one special character.</string>
     <string name="password_required">Password is required</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

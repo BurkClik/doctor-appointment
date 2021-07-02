@@ -1,34 +1,41 @@
 package com.example.doctorappointment.ui.register.validator
 
+import com.example.doctorappointment.R
+import com.google.common.truth.Truth
 import org.junit.Assert.*
 
 import junit.framework.TestCase
 import org.junit.Test
 
-class EmailValidatorTest() {
+class EmailValidatorTest {
+
     private val emailValidator = EmailValidator()
 
     @Test
-    fun `should return false given empty email`() {
+    fun `given empty email, when validate called, then should return this field is required` () {
+
         // Given
         val email = ""
+        val expectedResult = R.string.this_field_is_required
 
         // When
-        val actualResult = emailValidator.isEmailEmpty(email)
+        val actualResult = emailValidator.validate(email)
 
         // Then
-        assertFalse(actualResult)
+        Truth.assertThat(actualResult).isEqualTo(expectedResult)
     }
 
     @Test
-    fun `should return false given not contains at sign or dot email`() {
+    fun `given not contains @ email, when validate called, then should return email is invalid` () {
+
         // Given
-        val email = "test@gmailcom"
+        val email = "burk.clik.com"
+        val expectedResult = R.string.email_is_invalid
 
         // When
-        val actualResult = emailValidator.containsAtAndDot(email)
+        val actualResult = emailValidator.validate(email)
 
         // Then
-        assertFalse(actualResult)
+        Truth.assertThat(actualResult).isEqualTo(expectedResult)
     }
 }

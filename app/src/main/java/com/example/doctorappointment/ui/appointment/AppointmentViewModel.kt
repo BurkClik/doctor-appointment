@@ -9,7 +9,9 @@ import com.example.doctorappointment.common.BaseViewModel
 import com.example.doctorappointment.common.Resource
 import com.example.doctorappointment.data.AuthRepository
 import com.example.doctorappointment.data.local.JwtStore
+import com.example.doctorappointment.databinding.FragmentReviewBinding
 import com.example.doctorappointment.domain.model.Appointment
+import com.example.doctorappointment.ui.review.ReviewFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -47,6 +49,7 @@ class AppointmentViewModel @Inject constructor(
 
         _appointmentHour.value = it.appointmentHour
     }
+
 
 
     fun getAppointment() {
